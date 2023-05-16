@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+@font-face{
+  font-family: "FuturaPTBold";
+  src: url(../fonts/FuturaPTBold.otf) format("opentype");
+}
+
+@font-face {
+  font-family: "FuturaPTMedium";
+  src: url(../fonts/FuturaPTMedium.otf) format("opentype");
+}
+
+:root{
+  --priGradient: #0F2027;
+  --secGradient: #203A43;
+  --thiGradient: #2C5364;
+
+  --colorVar01: #1a2a6c;
+  --colorVar02: #b21f1f;
+  --colorVar03: #2C5364;
+
+  --colorVar11: #12c2e9;
+  --colorVar12: #c471ed;
+  --colorVar13: #2C5364;
+
+
+}
+
+*{
+  margin: 0px;
+  padding: 0px;
+  font-family: "FuturaPTMedium";
+  color: #FFFFFF;
+}
+
+body{
+  height: 100svh;
+  background: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  width: 250px;
+  box-shadow: 1px 2px 4px 10px var(--colorVar01);
+  border-radius: 50%;
+}
+
+.hora-atual{
+  font-weight: bold;
+  font-size: 48px;
+}
