@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
 @font-face{
   font-family: "FuturaPTBold";
   src: url(../fonts/FuturaPTBold.otf) format("opentype");
@@ -10,47 +12,120 @@
   src: url(../fonts/FuturaPTMedium.otf) format("opentype");
 }
 
+@property --angle{
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
 :root{
-  --priGradient: #0F2027;
-  --secGradient: #203A43;
-  --thiGradient: #2C5364;
-
-  --colorVar01: #1a2a6c;
-  --colorVar02: #b21f1f;
-  --colorVar03: #2C5364;
-
-  --colorVar11: #12c2e9;
-  --colorVar12: #c471ed;
-  --colorVar13: #2C5364;
-
+  --priCor: #FBFBFB;
+  --segCor: #131723;
+  --terCor: #5FEAD1;
+  --quaCor: #4A4D55;
+  --quiCor: #1F2633;
 }
 
 *{
   margin: 0px;
   padding: 0px;
   font-family: "FuturaPTMedium";
-  color: #FFFFFF;
+  color: #FBFBFB;
 }
 
 body{
   height: 100svh;
-  background: #000000;
+  background-color: var(--segCor);
+}
+
+.hora-atual{
+  text-align: center;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: bold;
+  font-size: 48px;
+  margin-bottom: 30px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 }
 
 .circle-container{
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
-  height: 250px;
-  width: 250px;
-  box-shadow: 1px 2px 9px 5px var(--colorVar11);
+  position: relative;
+  margin: auto;
+  margin-top: 25px;
+  height: 280px;
+  width: 280px;
+  background-color: var(--quiCor);
+  box-shadow: 0px 0px 15px 2px #5fead1a2;
   border-radius: 50%;
 }
 
-.hora-atual{
-  font-weight: bold;
-  font-size: 48px;
+/* .circle-container::after{
+  content: "";
+  position: absolute;
+  inset: -.625em;
+  background: linear-gradient(135deg, var(--colorVar11), var(--colorVar12));
+  filter: blur(2.5em);
+  z-index: -1;
+  border-radius: inherit;
+} */
+
+h1{
+  font-size: 32px;
+  font-family: "FuturaPTMedium";
 }
+
+.timer-container{
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+.individual-time{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 32px;
+}
+
+.timer-status{
+  font-size: 20px;
+  transition: color .45s;
+}
+
+.buttons-container{
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.control-button{
+  display: flex;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: var(--quiCor);
+  border: none;
+  margin: 0px 15px;
+  transition: background-color .15s, box-shadow .15s;
+  outline: none;
+}
+
+.control-button:hover,
+.active-button{
+  background-color: var(--terCor);
+  box-shadow: 0px 0px 3px 1px var(--terCor);
+}
+
+span{
+  transition: color .15s;
+}
+
+.control-button:hover > span{
+  color: var(--segCor);
+}
+
+.material-icons.md-36 { font-size: 36px; }

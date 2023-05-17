@@ -7,13 +7,36 @@
   <title>Stopwatch App</title>
   <link rel="shortcut icon" href="images/faviconJS.ico" type="image/x-icon">
   <link rel="stylesheet" href="styles/style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+
+  <!-- <header>
+    <p class="js-hora-atual hora-atual">HH:MM:SS</p>
+  </header> -->
+
   <main>
     <div class="circle-container">
-      <p class="hora-atual">HH:MM:SS</p>
+      <h1>STOPWATCH</h1>
+      <div class="timer-container">
+        
+      </div>
+      <p id="timSts" class="timer-status">Inactive</p>
+    </div>
+    
+    <div class="buttons-container">
+      <button class="js-stop-button control-button">
+        <span class="material-icons md-36">stop</span>
+      </button>
+      <button id="js-play-button" class="control-button">
+        <span id="play-icon" class="material-icons md-36">play_arrow</span>
+      </button>
+      <button id="js-restart-button" class="control-button">
+        <span class="material-icons md-36">replay</span>
+      </button>
     </div>
   </main>
+
   <script src="script.js"></script>
 </body>
 </html>
