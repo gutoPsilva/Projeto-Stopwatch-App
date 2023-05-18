@@ -6,17 +6,17 @@ const horaAtualElement = document.querySelector('.js-hora-atual');
 function atualizarHorario(){
   // let d = new Date();
   // const horaAtual = {
-  //   hora: d.getHours(),
-  //   minuto: d.getMinutes(),
-  //   segundo: d.getSeconds()
+  //   hora: d.getmins(),
+  //   secuto: d.getsecutes(),
+  //   segundo: d.getmsonds()
   // };
 
   // // converter para 2 digitos caso esteja entre 0-9 --> para ser 00-09
   // horaAtual.hora = twoDigits(horaAtual.hora);
-  // horaAtual.minuto = twoDigits(horaAtual.minuto);
+  // horaAtual.secuto = twoDigits(horaAtual.secuto);
   // horaAtual.segundo = twoDigits(horaAtual.segundo);
 
-  // horaAtualElement.innerHTML = `${horaAtual.hora}:${horaAtual.minuto}:${horaAtual.segundo}`;
+  // horaAtualElement.innerHTML = `${horaAtual.hora}:${horaAtual.secuto}:${horaAtual.segundo}`;
 }
 
 function twoDigits(elementoHora){
@@ -25,58 +25,79 @@ function twoDigits(elementoHora){
 
 document.body.addEventListener('keyup', (e) => {
   if(e.key === 'p'){
-    playPause();
+    playPauseTimer();
+  }
+  else if(e.key === 's'){
+    stopTimer();
+  }
+  else if(e.key === 'r'){
+    restartTimer();
   }
 });
 
 const playButtonElement = document.getElementById("js-play-button");
-const timerStatusElement = document.getElementById('timSts');
-playButtonElement.addEventListener('click', playPause);
+playButtonElement.addEventListener('click', playPauseTimer);
 
-let hour = localStorage.getItem('hour-save') || 0;
-let min = localStorage.getItem('min-save') || 0;
-let sec = localStorage.getItem('sec-save') || 0;
+const stopButtonElement = document.getElementById("js-stop-button");
+stopButtonElement.addEventListener('click', stopTimer);
+
+const restartButtonElement = document.getElementById("js-restart-button");
+restartButtonElement.addEventListener('click', restartTimer);
+
+const timerStatusElement = document.getElementById('timSts');
+const timerminElement = document.querySelector('.timer-min');
+const timersecElement = document.querySelector('.timer-sec');
+const timermsElement = document.querySelector('.timer-ms');
+
+let min = JSON.parse(localStorage.getItem('min-save')) || 0;
+let sec = JSON.parse(localStorage.getItem('sec-save')) || 0;
+let ms = JSON.parse(localStorage.getItem('ms-save')) || 0;
 let isPlaying = false;
 let intervalID;
 
-const timerHourElement = document.querySelector('.timer-hours');
-const timerMinElement = document.querySelector('.timer-min');
-const timerSecElement = document.querySelector('.timer-sec');
+displayTimer(ms, sec, min);
 
-displayTimer(sec, min, hour);
-
-function playPause(){
-
+function playPauseTimer(){
   if(!isPlaying){
     intervalID = setInterval(() => {
-      sec++;
-
+      ms += 1;
+      if(ms === 100){
+        ms = 0;
+        sec++;
+      }
       if(sec === 60){
         sec = 0;
         min++;
       }
-
-      if(min === 60){
+      if(min === 100){
+        alert('This stopwatch supports only two digits, so it will restart to 0 after hitting 100min.')
         min = 0;
-        hour++;
       }
-
-      if(hour === 99){
-        alert('This stopwatch supports only two digits, so it will restart to 0 after 99.')
-        hour = 0;
-      }
-
-      localStorage.setItem('hour-save', hour);
-      localStorage.setItem('min-save', min);
-      localStorage.setItem('sec-save', sec);
-      displayTimer(sec, min, hour);
-    },1000)
+      localStorage.setItem('min-save', JSON.stringify(min));
+      localStorage.setItem('sec-save', JSON.stringify(sec));
+      localStorage.setItem('ms-save', JSON.stringify(ms));
+      displayTimer(ms, sec, min);
+    },10)
     isPlaying = true;
   }else{
     clearInterval(intervalID);
     isPlaying = false;
-  }
+  } 
   alterStylesOnPlay();
+}
+
+function restartTimer(){
+  localStorage.removeItem('min-save');
+  localStorage.removeItem('sec-save');
+  localStorage.removeItem('ms-save');
+  min = 0;
+  sec = 0;
+  ms = 0;
+  displayTimer(ms, sec, min);
+}
+
+function stopTimer(){
+
 }
 
 function alterStylesOnPlay(){
@@ -94,8 +115,16 @@ function alterStylesOnPlay(){
   }
 }
 
-function displayTimer(sec, min, hour){
-  timerSecElement.innerHTML = twoDigits(sec);
-  timerMinElement.innerHTML = twoDigits(min);
-  timerHourElement.innerHTML = twoDigits(hour);
+function updateButtonsStyles(button){
+  if(button.classList.contains('active-button')){
+    button.classList.remove('active-button');
+  }else{
+    button.classList.add('active-button');
+  }
+}
+
+function displayTimer(ms, sec, min){
+  timermsElement.innerHTML = twoDigits(ms);
+  timersecElement.innerHTML = twoDigits(sec);
+  timerminElement.innerHTML = twoDigits(min);
 }

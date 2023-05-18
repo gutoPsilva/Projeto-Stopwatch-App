@@ -20,23 +20,23 @@
       <h1>STOPWATCH</h1>
       <div class="timer-container">
         <p class="individual-time">
-          <span class="timer-hours">00</span>
-          :
           <span class="timer-min">00</span>
           :
           <span class="timer-sec">00</span>
+          :
+          <span class="timer-ms">00</span>
         </p>
         <p class="time-desc">
-          <span>hou</span>
-          <span>min</span> 
-          <span>sec</span>
+          <span>min</span>
+          <span>sec</span> 
+          <span>ms</span>
         </p>
       </div>
       <p id="timSts"class="timer-status">Inactive</p>
     </div>
     
     <div class="buttons-container">
-      <button class="js-stop-button control-button">
+      <button id="js-stop-button" class="control-button">
         <span class="material-icons md-36">stop</span>
       </button>
       <button id="js-play-button" class="control-button">

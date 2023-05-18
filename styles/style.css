@@ -83,9 +83,9 @@ h1{
   flex-direction: column;
 }
 
-.timer-hours,
 .timer-min,
-.timer-sec{
+.timer-sec,
+.timer-ms{
   font-family: 'Roboto Mono', monospace;
 }
 
