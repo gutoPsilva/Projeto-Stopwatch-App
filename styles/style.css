@@ -80,15 +80,37 @@ h1{
 
 .timer-container{
   display: flex;
-  justify-content: center;
-  align-items: start;
+  flex-direction: column;
+}
+
+.timer-hours,
+.timer-min,
+.timer-sec{
+  font-family: 'Roboto Mono', monospace;
 }
 
 .individual-time{
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
   font-size: 32px;
+}
+
+.time-desc{
+  width: 130px;
+}
+
+.time-desc > span{
+  margin-left: 9px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 16px;
+  color: var(--quaCor);
+  cursor: pointer;
+  transition: color .15s;
+}
+
+.time-desc > span:hover{
+  color: var(--terCor);
 }
 
 .timer-status{
