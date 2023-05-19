@@ -35,17 +35,8 @@
 
 body{
   height: 100svh;
-  background-color: var(--segCor);
-}
-
-.hora-atual{
-  text-align: center;
-  font-family: 'Roboto Mono', monospace;
-  font-weight: bold;
-  font-size: 48px;
-  margin-bottom: 30px;
-  display: flex;
-  flex-direction: column;
+  background: url(../images/pexels-david-skyrius-2129796.jpg) no-repeat center center black;
+  background-size: contain;
 }
 
 .circle-container{
@@ -58,23 +49,15 @@ body{
   margin-top: 25px;
   height: 280px;
   width: 280px;
-  background-color: var(--quiCor);
-  box-shadow: 0px 0px 15px 2px #5fead1a2;
+  background-color: rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.6);
   border-radius: 50%;
+
+  transition: box-shadow .5s;
 }
 
-/* .circle-container::after{
-  content: "";
-  position: absolute;
-  inset: -.625em;
-  background: linear-gradient(135deg, var(--colorVar11), var(--colorVar12));
-  filter: blur(2.5em);
-  z-index: -1;
-  border-radius: inherit;
-} */
-
 h1{
-  font-size: 32px;
+  font-size: 26px;
   font-family: "FuturaPTMedium";
 }
 
@@ -93,20 +76,21 @@ h1{
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 32px;
+  font-size: 48px;
 }
 
 .time-desc{
-  width: 130px;
+  width: 198px;
+  display: flex;
+  justify-content: space-around;
+  color: #FBFBFB;
 }
 
 .time-desc > span{
-  margin-left: 9px;
   font-family: 'Roboto Mono', monospace;
   font-size: 16px;
-  color: var(--quaCor);
   cursor: pointer;
-  transition: color .15s;
+  transition: color .5s;
 }
 
 .time-desc > span:hover{
@@ -150,4 +134,4 @@ span{
   color: var(--segCor);
 }
 
-.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-36 { font-size: 36px;}

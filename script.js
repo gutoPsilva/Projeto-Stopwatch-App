@@ -42,12 +42,9 @@ const stopButtonElement = document.getElementById("js-stop-button");
 stopButtonElement.addEventListener('click', stopTimer);
 
 const restartButtonElement = document.getElementById("js-restart-button");
-restartButtonElement.addEventListener('click', restartTimer);
+// restartButtonElement.addEventListener('click', restartTimer);
 
 const timerStatusElement = document.getElementById('timSts');
-const timerminElement = document.querySelector('.timer-min');
-const timersecElement = document.querySelector('.timer-sec');
-const timermsElement = document.querySelector('.timer-ms');
 
 let min = JSON.parse(localStorage.getItem('min-save')) || 0;
 let sec = JSON.parse(localStorage.getItem('sec-save')) || 0;
@@ -86,7 +83,11 @@ function playPauseTimer(){
   alterStylesOnPlay();
 }
 
-function restartTimer(){
+function stopTimer(){
+  clearInterval(intervalID);
+  isPlaying = false;
+
+  // clean values
   localStorage.removeItem('min-save');
   localStorage.removeItem('sec-save');
   localStorage.removeItem('ms-save');
@@ -94,10 +95,12 @@ function restartTimer(){
   sec = 0;
   ms = 0;
   displayTimer(ms, sec, min);
-}
 
-function stopTimer(){
-
+  playButtonElement.innerHTML = `<span class="material-icons md-36">play_arrow</span>`;
+  timerStatusElement.innerText = `Inactive`;
+  timerStatusElement.style.color = '#FBFBFB';
+  playButtonElement.classList.remove('active-button');
+  document.querySelector('.circle-container').style.boxShadow = "0px 0px 15px 2px rgba(0, 0, 0, 0.6)";
 }
 
 function alterStylesOnPlay(){
@@ -106,12 +109,16 @@ function alterStylesOnPlay(){
     timerStatusElement.innerText = `Inactive`;
     timerStatusElement.style.color = '#FBFBFB';
     playButtonElement.classList.remove('active-button');
+    playButtonElement.title = "Start";
+    document.querySelector('.circle-container').style.boxShadow = "0px 0px 15px 2px rgba(0, 0, 0, 0.6)";
   }
   else{
     playButtonElement.innerHTML = `<span class="material-icons md-36">pause</span>`;
     timerStatusElement.innerText = `Active`;
     timerStatusElement.style.color = '#5FEAD1';
     playButtonElement.classList.add('active-button');
+    playButtonElement.title = "Pause";
+    document.querySelector('.circle-container').style.boxShadow = "0px 0px 16px 4px var(--terCor)";
   }
 }
 
@@ -124,7 +131,7 @@ function updateButtonsStyles(button){
 }
 
 function displayTimer(ms, sec, min){
-  timermsElement.innerHTML = twoDigits(ms);
-  timersecElement.innerHTML = twoDigits(sec);
-  timerminElement.innerHTML = twoDigits(min);
+  document.querySelector('.timer-ms').innerHTML = twoDigits(ms);
+  document.querySelector('.timer-sec').innerHTML = twoDigits(sec);
+  document.querySelector('.timer-min').innerHTML = twoDigits(min);
 }
