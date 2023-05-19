@@ -9,6 +9,7 @@ saveButtonElement.addEventListener('click', saveLap);
 
 const timerStatusElement = document.getElementById('timSts');
 
+
 document.body.addEventListener('keyup', (e) => {
   if(e.key === 'p'){
     playPauseTimer();
@@ -62,6 +63,8 @@ function playPauseTimer(){
   alterStylesOnPlay();
 }
 
+let didClean = false;
+
 function stopTimer(){
   clearInterval(intervalID);
   isPlaying = false;
@@ -73,6 +76,7 @@ function stopTimer(){
   min = 0;
   sec = 0;
   ms = 0;
+  didClean = true;
   displayTimer(ms, sec, min);
 
   playButtonElement.innerHTML = `<span class="material-icons md-36">play_arrow</span>`;
@@ -107,23 +111,46 @@ function displayTimer(ms, sec, min){
   document.querySelector('.timer-min').innerHTML = twoDigits(min);
 }
 
+let i = 1;
 function saveLap(){
-  const runSavesElement = document.querySelector('.run-saves');
+  const savedRunsElement = document.querySelector('.run-saves');
   if(!min && !sec && !ms){
     alert('There are no values to save.');
     return;
   }
 
-  const addRun = (i) => {
-    const run = `<div class="run">`;
-    runSavesElement.append(run);
+  if(didClean){
+    savedRunsElement.innerHTML = '';
+    savedRunsElement.style.opacity = 1;
+    didClean = false;
   }
 
 
+  if(i>6){
+    alert('You have reached the limit of 6 laps.');
+    const msg = confirm('Do you want to clean the lap list?');
+    if(msg){
+      savedRunsElement.innerHTML = '';
+      i = 1;
+    }else{
+      return;
+    }
+  }
 
+  let lapListHTML = '';
+  const timer = [];
+  const html = `
+  <div class='run'>
+    <span>Lap ${i}</span>
+    <span class="monospace-span">
+      ${twoDigits(min)}: ${twoDigits(sec)} : ${twoDigits(ms)}
+    </span>
+  </div>
+  `;
+  lapListHTML = html;
+  savedRunsElement.innerHTML += lapListHTML;
+  i++;
 }
-
-
 
 // relógio digital que atualiza a cada seg
 //const horaAtualElement = document.querySelector('.js-hora-atual');
