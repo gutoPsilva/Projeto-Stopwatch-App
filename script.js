@@ -1,27 +1,13 @@
-const horaAtualElement = document.querySelector('.js-hora-atual');
+const playButtonElement = document.getElementById("js-play-button");
+playButtonElement.addEventListener('click', playPauseTimer);
 
-// atualizar relógio a cada segundo.
-// setInterval(() => atualizarHorario(), 1000);
+const stopButtonElement = document.getElementById("js-stop-button");
+stopButtonElement.addEventListener('click', stopTimer);
 
-function atualizarHorario(){
-  // let d = new Date();
-  // const horaAtual = {
-  //   hora: d.getmins(),
-  //   secuto: d.getsecutes(),
-  //   segundo: d.getmsonds()
-  // };
+const saveButtonElement = document.getElementById("js-save-button");
+saveButtonElement.addEventListener('click', saveLap);
 
-  // // converter para 2 digitos caso esteja entre 0-9 --> para ser 00-09
-  // horaAtual.hora = twoDigits(horaAtual.hora);
-  // horaAtual.secuto = twoDigits(horaAtual.secuto);
-  // horaAtual.segundo = twoDigits(horaAtual.segundo);
-
-  // horaAtualElement.innerHTML = `${horaAtual.hora}:${horaAtual.secuto}:${horaAtual.segundo}`;
-}
-
-function twoDigits(elementoHora){
-  return elementoHora < 10 ? '0' + elementoHora : elementoHora; // retornar elementoHora com 0X caso for menor que 10
-}
+const timerStatusElement = document.getElementById('timSts');
 
 document.body.addEventListener('keyup', (e) => {
   if(e.key === 'p'){
@@ -30,21 +16,10 @@ document.body.addEventListener('keyup', (e) => {
   else if(e.key === 's'){
     stopTimer();
   }
-  else if(e.key === 'r'){
-    restartTimer();
+  else if(e.key === 'l'){
+    saveLap();
   }
 });
-
-const playButtonElement = document.getElementById("js-play-button");
-playButtonElement.addEventListener('click', playPauseTimer);
-
-const stopButtonElement = document.getElementById("js-stop-button");
-stopButtonElement.addEventListener('click', stopTimer);
-
-const restartButtonElement = document.getElementById("js-restart-button");
-// restartButtonElement.addEventListener('click', restartTimer);
-
-const timerStatusElement = document.getElementById('timSts');
 
 let min = JSON.parse(localStorage.getItem('min-save')) || 0;
 let sec = JSON.parse(localStorage.getItem('sec-save')) || 0;
@@ -53,6 +28,10 @@ let isPlaying = false;
 let intervalID;
 
 displayTimer(ms, sec, min);
+
+function twoDigits(elementoHora){
+  return elementoHora < 10 ? '0' + elementoHora : elementoHora; // retornar elementoHora com 0X caso for menor que 10
+}
 
 function playPauseTimer(){
   if(!isPlaying){
@@ -122,16 +101,48 @@ function alterStylesOnPlay(){
   }
 }
 
-function updateButtonsStyles(button){
-  if(button.classList.contains('active-button')){
-    button.classList.remove('active-button');
-  }else{
-    button.classList.add('active-button');
-  }
-}
-
 function displayTimer(ms, sec, min){
   document.querySelector('.timer-ms').innerHTML = twoDigits(ms);
   document.querySelector('.timer-sec').innerHTML = twoDigits(sec);
   document.querySelector('.timer-min').innerHTML = twoDigits(min);
+}
+
+function saveLap(){
+  const runSavesElement = document.querySelector('.run-saves');
+  if(!min && !sec && !ms){
+    alert('There are no values to save.');
+    return;
+  }
+
+  const addRun = (i) => {
+    const run = `<div class="run">`;
+    runSavesElement.append(run);
+  }
+
+
+
+}
+
+
+
+// relógio digital que atualiza a cada seg
+//const horaAtualElement = document.querySelector('.js-hora-atual');
+
+// atualizar relógio a cada segundo.
+// setInterval(() => atualizarHorario(), 1000);
+
+function atualizarHorario(){
+  // let d = new Date();
+  // const horaAtual = {
+  //   hora: d.getmins(),
+  //   secuto: d.getsecutes(),
+  //   segundo: d.getmsonds()
+  // };
+
+  // // converter para 2 digitos caso esteja entre 0-9 --> para ser 00-09
+  // horaAtual.hora = twoDigits(horaAtual.hora);
+  // horaAtual.secuto = twoDigits(horaAtual.secuto);
+  // horaAtual.segundo = twoDigits(horaAtual.segundo);
+
+  // horaAtualElement.innerHTML = `${horaAtual.hora}:${horaAtual.secuto}:${horaAtual.segundo}`;
 }
