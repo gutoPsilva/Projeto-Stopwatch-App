@@ -9,7 +9,6 @@ saveButtonElement.addEventListener('click', saveLap);
 
 const timerStatusElement = document.getElementById('timSts');
 
-
 document.body.addEventListener('keyup', (e) => {
   if(e.key === 'p'){
     playPauseTimer();
@@ -149,24 +148,25 @@ function saveLap(){
   i++;
 }
 
-// relógio digital que atualiza a cada seg
-//const horaAtualElement = document.querySelector('.js-hora-atual');
+/* relógio digital que atualiza a cada seg
+const horaAtualElement = document.querySelector('.js-hora-atual');
 
-// atualizar relógio a cada segundo.
-// setInterval(() => atualizarHorario(), 1000);
+ atualizar relógio a cada segundo.
+ setInterval(() => atualizarHorario(), 1000);
 
 function atualizarHorario(){
-  // let d = new Date();
-  // const horaAtual = {
-  //   hora: d.getmins(),
-  //   secuto: d.getsecutes(),
-  //   segundo: d.getmsonds()
-  // };
+   let d = new Date();
+   const horaAtual = {
+   hora: d.getmins(),
+   secuto: d.getsecutes(),
+   segundo: d.getmsonds()
+ };
 
-  // // converter para 2 digitos caso esteja entre 0-9 --> para ser 00-09
-  // horaAtual.hora = twoDigits(horaAtual.hora);
-  // horaAtual.secuto = twoDigits(horaAtual.secuto);
-  // horaAtual.segundo = twoDigits(horaAtual.segundo);
+ converter para 2 digitos caso esteja entre 0-9 --> para ser 00-09
+ horaAtual.hora = twoDigits(horaAtual.hora);
+ horaAtual.secuto = twoDigits(horaAtual.secuto);
+ horaAtual.segundo = twoDigits(horaAtual.segundo);
 
-  // horaAtualElement.innerHTML = `${horaAtual.hora}:${horaAtual.secuto}:${horaAtual.segundo}`;
+ horaAtualElement.innerHTML = `${horaAtual.hora}:${horaAtual.secuto}:${horaAtual.segundo}`;
 }
+*/
